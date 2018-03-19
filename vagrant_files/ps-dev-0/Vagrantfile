@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.ssh.insert_key = false
+
   config.ssh.username = 'vagrant'
   config.ssh.password = 'vagrant'
 
@@ -17,13 +17,19 @@ Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v|
       v.gui = false
-      v.memory = 4096
-      v.cpus = 2
+      v.memory = 6669
+      v.cpus = 1
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
 
     config.vm.provision "shell", inline: "echo Hello, World"
+    
+    config.ssh.forward_agent = true
+    config.ssh.insert_key = false
+    config.ssh.private_key_path = ["~/.ssh/id_rsa", "~/.vagrant.d/insecure_private_key"]
+    #config.ssh.keys_only = false
+    config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
   end
 
 end
