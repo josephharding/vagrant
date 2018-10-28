@@ -1,4 +1,6 @@
 
+## THIS REPO IS ABANDONED - MAYBE USFUL FOR PACKER, BUT PROBABLY NOT
+
 clear old vagrant dirs.. major source of bugs!
 
 ```
